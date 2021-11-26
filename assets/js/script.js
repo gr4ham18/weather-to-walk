@@ -1,8 +1,31 @@
 var dogSectionEl = document.getElementById("dog-selection");
 var dogImgContainerEl = document.getElementById("dog-img-container");
 var dogImageEl = document.createElement("img");
-var dogNames = [];
 
+var submitCityEl = document.getElementById("submit-btn");
+
+var dogNames = [];
+var nameArr = [];
+
+var apiKey = "808721e2dc63debd30d894b4d377543b";
+var cityName;
+var dateToday;
+var temp;
+var wind;
+var humidity;
+var uvIndex;
+
+
+fetch("http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=" + apiKey).then(res => res.json())
+.then(data => console.log(data));
+
+//get id of search city button
+submitCityEl.addEventListener("click", getCityName);
+
+
+function getCityName(event){
+    console.log(event);   
+}
 
 async function start() {
     const response = await fetch('https://api.thedogapi.com/v1/breeds')
@@ -11,9 +34,22 @@ async function start() {
     console.log(data[0].image);
     createDogNames(data);
     dogNames = data;
+
+    console.log(dogNames[0].temperament);
+
+    //split dog temperament with "," to array
+    nameArr = dogNames[0].temperament.split(', ');
+    console.log(nameArr);
+
+
 }
 
+
+
+
 start();
+
+
 
 
 function createDogNames(breedNames){
@@ -40,16 +76,9 @@ function createDogNames(breedNames){
         dogSectionEl.appendChild(dogNameEl);
         dogImgContainerEl.appendChild(dogImageEl);
 
-
-
-
     }
 
 }
-
-
-
-
 
 
 dogSectionEl.addEventListener("change", function(){
@@ -74,3 +103,41 @@ function getValue(id){
 //     if
 
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
