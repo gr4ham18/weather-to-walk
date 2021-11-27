@@ -84,7 +84,6 @@ function createDogNames(breedNames){
 
 }
 
-
 //create weather
 function createWeather(dataWeather){
 
