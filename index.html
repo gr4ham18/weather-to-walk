@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Weather To Walk | Home</title>
 </head>
 
-<body>
+<body class="card-panel cyan lighten-3 ">
     <!-- Main Header -->
     <header id="main-header">
         <h1>Welcome to Weather To Walk</h1>
@@ -21,42 +24,36 @@
 
         <!-- Dog API Area -->
         <div id="dog-section" class="dog-area">
-            <h2>Doggo Area</h2>
             <div class="input-field col s12">
                 <select id="dog-selection" class="browser-default">
-                    <option value="" disabled selected>Choose your option</option>
+                    <option value="" disabled selected>Choose your Doggo</option>
 
                 </select>
-                
+
             </div>
             <!-- <select id="dog-selection">
                 <option >Choose a dog breed</option>
             </select> -->
 
             <div id="dog-img-container" class="">
-
-
             </div>
-
-
-            
         </div>
 
 
 
         <!-- Weather/Forecast Area -->
         <div class="weather-area">
-            <h2>Weather Area</h2>
 
             <!-- add form to get city name -->
             <form action="">
                 <h4>Search for a City:</h4>
-                <input name="city" id="city" type="text" autofocus="true" class="form-input" placeholder="Type a city name here">
+                <input name="city" id="city" type="text" autofocus="true" class="form-input"
+                    placeholder="Type a city name here">
                 <button id="submit-btn" type="submit" class="btn">Search City</button>
             </form>
 
             <div id="weather" class="weather-info">
-                
+
             </div>
         </div>
 
