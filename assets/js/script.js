@@ -12,6 +12,7 @@ var nameArr = [];
 var apiKey = "808721e2dc63debd30d894b4d377543b";
 var cityName = "Orlando";
 var weatherDescription  = "";
+var weatherIcon;
 var dateToday;
 var temp;
 var wind;
@@ -91,12 +92,21 @@ function createWeather(dataWeather){
     var tempEl = document.createElement("div");
     var temperatureEl = document.createElement("p");
     var descriptionEl = document.createElement("p");
+    var goodWeatherEl = document.createElement("p");
+    var iconEl = document.createElement("img");
 
     console.log(dataWeather);
 
     //weatherDescription
     weatherDescription = dataWeather.weather[0].description;
     console.log(weatherDescription);
+
+    //store weatherIcon
+    weatherIcon = dataWeather.weather[0].icon;
+    console.log(weatherIcon);
+
+    //able to add icons
+    iconEl.src = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
     //do math to covert to farenheit
     kelvin = dataWeather.main.temp;
@@ -114,6 +124,16 @@ function createWeather(dataWeather){
     //add the p element to the empty div
     tempEl.appendChild(temperatureEl);
     tempEl.appendChild(descriptionEl);
+    tempEl.appendChild(iconEl);
+
+    //check if weather is good if good take dog for walk else dont
+    if(weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
+        goodWeatherEl.innerHTML = "Go take your dog for a walk";
+        tempEl.appendChild(goodWeatherEl);
+    }else{
+        goodWeatherEl.innerHTML = "Maybe Stay home";
+        tempEl.appendChild(goodWeatherEl);
+    }    
 
     //add empty div to div with id of weather
     weatherSectionEl.appendChild(tempEl);
