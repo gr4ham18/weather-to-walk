@@ -5,6 +5,8 @@ var dogImageEl = document.createElement("img");
 var weatherSectionEl = document.getElementById("weather");
 var submitCityEl = document.getElementById("submit-btn");
 var cityInputValue = document.querySelector("#city");
+var localCityName = document.getElementsByClassName("form-input");
+
 
 var dogNames = [];
 var nameArr = [];
@@ -12,6 +14,7 @@ var nameArr = [];
 var apiKey = "808721e2dc63debd30d894b4d377543b";
 var cityName = "Orlando";
 var weatherDescription  = "";
+var dogTemperament = [];
 var weatherIcon;
 var dateToday;
 var temp;
@@ -31,6 +34,7 @@ async function start() {
 
     createDogNames(data);
     dogNames = data;
+    console.log(dogNames);
 
     console.log(dogNames[0].temperament);
 
@@ -46,9 +50,38 @@ submitCityEl.addEventListener("click", function(){
     event.preventDefault();
     console.log(cityInputValue.value);
     cityName = cityInputValue.value;
-    console.log(cityName);
+
+    
+
+    //store local storage
+    localStorage.setItem("cityName", cityName);
+
+
     startWeather(cityName);
 })
+
+// function loadCityName(){
+//     //load the text back from local storage
+//     //$("#hour-holder #textarea-0").val(localStorage.getItem("cityName"));
+
+    
+
+
+//     localStorageCity = localStorage.getItem("cityName");
+//     console.log(localStorageCity);
+//     document.getElementById("placeholder").innerText = localStorage.getItem("cityName");
+
+//     startWeather(cityName);
+
+//     // localCityName = localStorageCity.val;
+
+//     // console.log(localStorageCity);
+//     // if(!localStorageCity){
+//     //     localStorageCity = [];
+//     //     return false;
+//     // }
+//     // localStorageCity = JSON.parse(localStorageCity);
+// }
 
 //async function to fetch the openweather api
 async function startWeather(cityName) {
@@ -60,6 +93,7 @@ async function startWeather(cityName) {
     
 }
 
+//loadCityName(cityName);
 start();
 
 function createDogNames(breedNames){
@@ -148,6 +182,27 @@ dogSectionEl.addEventListener("change", function(){
         if(selectValue === dogNames[i].name){    
             dogImageEl.src = dogNames[i].image.url;
             console.log(dogNames[i]);
+
+            //create element
+            var dogBreedEl = document.createElement("p");
+            var dogOriginEl = document.createElement("p");
+            var dogTemperamentEl = document.createElement("p");
+
+            //create text
+            dogBreedEl.innerHTML = dogNames[i].name;
+            dogTemperamentEl.innerHTML = dogNames[i].temperament;
+            dogOriginEl.innerHTML = dogNames[i].origin;
+
+            //checks if origin is unknown or undefined
+            if(dogOriginEl.innerHTML === "" || dogOriginEl.innerHTML === "undefined"){
+                dogOriginEl.innerHTML = "The dog origin is unknown";
+            }
+
+            //append to the photos
+            dogImgContainerEl.appendChild(dogBreedEl);
+            dogImgContainerEl.appendChild(dogOriginEl);
+            dogImgContainerEl.appendChild(dogTemperamentEl);
+
         }
     }
 });
