@@ -1,0 +1,46 @@
+/* Font Import */
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* General Styling */
+body {
+    text-align: center;
+    font-family: 'Indie Flower';
+}
+
+p {
+    font-size: 20px;
+}
+
+h1 {
+    margin-bottom: 10%;
+    border-bottom: 2px solid black;
+}
+
+img {
+    width: 60%;
+    border-radius: 15px;
+}
+
+select {
+    border-radius: 10px;
+}
+
+/* General Styling End */
+
+
+/* Work on this soon */
+::-webkit-input-placeholder {
+    color: rgb(5, 5, 5); 
+    background: rgba(rgb(255, 255, 255), rgb(253, 253, 253), rgb(255, 255, 255), );
+    
+}
+
+
+.weather-area {
+    margin-top: 10%;
+}
