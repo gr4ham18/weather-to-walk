@@ -1,8 +1,8 @@
+//variables/javascript elements
 var dogSectionEl = document.getElementById("dog-selection");
 var dogImgContainerEl = document.getElementById("dog-img-container");
 var dogImageEl = document.createElement("img");
 var weatherSectionEl = document.getElementById("weather");
-
 var submitCityEl = document.getElementById("submit-btn");
 var cityInputValue = document.querySelector("#city");
 
@@ -19,29 +19,14 @@ var humidity;
 var uvIndex;
 var kelvin = 0;
 
-// var fahrenheit = ((kelvin - 273.15) * (9/5) + 32);
-
-// event.preventDefault();  may need this
-
-// fetch("http://api.openweathermap.org/data/2.5/forecast?id=524901&appid="+ cityInputValue.value + apiKey).then(res => res.json())
-// .then(data => console.log(data));
-
-//THIS WORKS
-//https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=808721e2dc63debd30d894b4d377543b
-
 //api.openweathermap.org/data/2.5/weather?q=Orlando&appid=808721e2dc63debd30d894b4d377543b
 fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey).then(res => res.json())
 .then(data => console.log(data));
 
-
-//get id of search city button
-//submitCityEl.addEventListener("click", getCityName);
-
-
+//async function to fetch the dog api
 async function start() {
     const response = await fetch('https://api.thedogapi.com/v1/breeds')
     const data = await response.json()
-
 
     createDogNames(data);
     dogNames = data;
@@ -55,7 +40,7 @@ async function start() {
 
 }
 
-
+//event listener on the search city button in index.html
 submitCityEl.addEventListener("click", function(){
     event.preventDefault();
     console.log(cityInputValue.value);
@@ -64,45 +49,32 @@ submitCityEl.addEventListener("click", function(){
     startWeather(cityName);
 })
 
+//async function to fetch the openweather api
 async function startWeather(cityName) {
+    //adds cityName and apiKey to the fetch url
     const responseWeather = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey)
     const dataWeather = await responseWeather.json()
 
     createWeather(dataWeather);
-    // console.log(dataWeather);
-    // kelvin = dataWeather.main.temp;
-    // var fahrenheit = ((kelvin - 273.15) * (9/5) + 32);
-    // var fTwoDigits = fahrenheit.toFixed(1);
-    // console.log(fTwoDigits);
     
 }
 
-
-
-
 start();
-
-
 
 function createDogNames(breedNames){
     for(var i = 0; i < breedNames.length; i++){// change to breedNames.lenght afterwards
-
-        
-        //console.log(breedNames[i].name);
 
         //create dog list
         var dogNameEl = document.createElement("option");
 
         //adds dog names to list
         dogNameEl.innerHTML = breedNames[i].name;
-        //dogImageEl.innerHTML = breedNames[i].image.url;
 
-        //give dog option an id
+        //give ids
         dogNameEl.id = "dog-" + i;
-
-        //dogImageEl.src = breedNames[i].image.url;
-
-        //dogNameEl.setAttribute("value", breedNames[i].name);
+        
+        //add class.Names
+        //dogNameEl.className = 
 
         //append option to select elements in html
         dogSectionEl.appendChild(dogNameEl);
@@ -115,33 +87,42 @@ function createDogNames(breedNames){
 
 //create weather
 function createWeather(dataWeather){
+
+    //create elements
     var tempEl = document.createElement("div");
-    
+    var temperatureEl = document.createElement("p");
+    var descriptionEl = document.createElement("p");
 
     console.log(dataWeather);
-    tempEl.innerHTML = "";
 
+    //weatherDescription
     weatherDescription = dataWeather.weather[0].description;
     console.log(weatherDescription);
 
+    //do math to covert to farenheit
     kelvin = dataWeather.main.temp;
     var fahrenheit = ((kelvin - 273.15) * (9/5) + 32);
     var fTwoDigits = fahrenheit.toFixed(1);
 
-    //
-    tempEl.class = "temp";
-    tempEl.innerHTML = "Fahrenheit: " + fTwoDigits;
+    //add class name
+    temperatureEl.className = "temp";
+    descriptionEl.className = "description";
 
+    //add text
+    temperatureEl.innerHTML = "Fahrenheit: " + fTwoDigits;
+    descriptionEl.innerHTML = "Today we have " + weatherDescription;
+
+    //add the p element to the empty div
+    tempEl.appendChild(temperatureEl);
+    tempEl.appendChild(descriptionEl);
+
+    //add empty div to div with id of weather
     weatherSectionEl.appendChild(tempEl);
 
 
-    
-
 }
 
-
-
-
+//event listern for change on the drop down list
 dogSectionEl.addEventListener("change", function(){
     var selectValue = getValue("dog-selection");
     for(var i = 0; i < dogNames.length; i++){
@@ -153,52 +134,6 @@ dogSectionEl.addEventListener("change", function(){
 });
 
 
-
-
 function getValue(id){
     return document.getElementById(id).value;
 }
-
-// function createDogImage(breedNames){
-
-//     if
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
