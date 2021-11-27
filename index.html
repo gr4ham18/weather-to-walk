@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather To Walk | Home</title>
 </head>
@@ -21,9 +22,16 @@
         <!-- Dog API Area -->
         <div id="dog-section" class="dog-area">
             <h2>Doggo Area</h2>
-            <select id="dog-selection">
+            <div class="input-field col s12">
+                <select id="dog-selection" class="browser-default">
+                    <option value="" disabled selected>Choose your option</option>
+
+                </select>
+                
+            </div>
+            <!-- <select id="dog-selection">
                 <option >Choose a dog breed</option>
-            </select>
+            </select> -->
 
             <div id="dog-img-container" class="">
 
@@ -31,7 +39,7 @@
             </div>
 
 
-            </div>
+            
         </div>
 
 
@@ -48,7 +56,7 @@
             </form>
 
             <div id="weather" class="weather-info">
-
+                
             </div>
         </div>
 
@@ -62,6 +70,7 @@
     </div>
 
     <!-- Javascript Source -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
