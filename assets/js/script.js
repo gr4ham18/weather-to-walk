@@ -188,9 +188,9 @@ dogSectionEl.addEventListener("change", function(){
             var dogTemperamentEl = document.createElement("p");
 
             //create text
-            dogBreedEl.innerHTML = dogNames[i].name;
-            dogTemperamentEl.innerHTML = dogNames[i].temperament;
-            dogOriginEl.innerHTML = dogNames[i].origin;
+            dogBreedEl.innerHTML = "Breed: " + dogNames[i].name;
+            dogOriginEl.innerHTML = "Breed Origin: " + dogNames[i].origin;
+            dogTemperamentEl.innerHTML = "Average Temperament: " + dogNames[i].temperament;
 
             //checks if origin is unknown or undefined
             if(dogOriginEl.innerHTML === "" || dogOriginEl.innerHTML === "undefined"){
