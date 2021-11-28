@@ -36,13 +36,13 @@ async function start() {
     dogNames = data;
     console.log(dogNames);
 
-    for(i=0; i<dogNames.length ; i++){
-        var dogTemperament = dogNames[i].temperament;
-        console.log(dogTemperament);
+    // for(i=0; i<dogNames.length ; i++){
+    //     var dogTemperament = dogNames[i].temperament;
+    //     console.log(dogTemperament);
 
-        var dogArr = dogTemperament.split(',');
-        console.log(dogArr);
-    }
+    //     var dogArr = dogTemperament.split(',');
+    //     console.log(dogArr);
+    // }
 
     console.log(dogNames[0].temperament);
 
