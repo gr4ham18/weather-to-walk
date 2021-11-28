@@ -17,12 +17,13 @@ p {
 }
 
 h1 {
-    margin-bottom: 10%;
+    /* margin-bottom: 10%; */
     border-bottom: 2px solid black;
 }
 
 img {
     width: 60%;
+    height: 60%;
     border-radius: 15px;
 }
 
@@ -40,7 +41,10 @@ select {
     
 }
 
-
+footer {
+    border-top: 2px solid black;
+}
+/* 
 .weather-area {
     margin-top: 10%;
-}
+} */
