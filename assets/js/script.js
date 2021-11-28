@@ -116,6 +116,7 @@ function createWeather(dataWeather){
     var descriptionEl = document.createElement("p");
     var goodWeatherEl = document.createElement("p");
     var iconEl = document.createElement("img");
+    var locationEl = document.createElement("p");
 
     console.log(dataWeather);
 
@@ -140,13 +141,17 @@ function createWeather(dataWeather){
     descriptionEl.className = "description";
 
     //add text
+    locationEl.innerHTML = dataWeather.name;
     temperatureEl.innerHTML = "Fahrenheit: " + fTwoDigits;
     descriptionEl.innerHTML = "Today we have " + weatherDescription;
 
+
     //add the p element to the empty div
-    tempEl.appendChild(temperatureEl);
+    tempEl.appendChild(locationEl);
     tempEl.appendChild(descriptionEl);
     tempEl.appendChild(iconEl);
+    tempEl.appendChild(temperatureEl);
+
 
     //check if weather is good if good take dog for walk else dont
     if(weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
