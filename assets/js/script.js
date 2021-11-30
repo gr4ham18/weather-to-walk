@@ -10,6 +10,7 @@ var localCityName = document.getElementsByClassName("form-input");
 
 var dogNames = [];
 var nameArr = [];
+var dogSelected = "dog";
 
 var apiKey = "808721e2dc63debd30d894b4d377543b";
 var cityName = "Orlando";
@@ -22,7 +23,6 @@ var wind;
 var humidity;
 var uvIndex;
 var kelvin = 0;
-var i = 0;
 
 //api.openweathermap.org/data/2.5/weather?q=Orlando&appid=808721e2dc63debd30d894b4d377543b
 fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey).then(res => res.json())
@@ -154,28 +154,19 @@ function createWeather(dataWeather) {
     tempEl.appendChild(temperatureEl);
 
 
-    //check if weather is good if good take dog for walk else dont
-    // if(weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
-    //     goodWeatherEl.innerHTML = "Go take your dog for a walk";
-    //     tempEl.appendChild(goodWeatherEl);
-    // }else{
-    //     goodWeatherEl.innerHTML = "Maybe Stay home";
-    //     tempEl.appendChild(goodWeatherEl);
-    // }  
-
     if (fTwoDigits >= 85) {
         if (weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
-            goodWeatherEl.innerHTML = "Go take a short walk and bring some water for you and your dog";
+            goodWeatherEl.innerHTML = "Go take a short walk and bring some water for you and your " + dogSelected +"!";
             tempEl.appendChild(goodWeatherEl);
         }
     } else if (weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds") {
-        goodWeatherEl.innerHTML = "Go take your dog for a walk";
+        goodWeatherEl.innerHTML = "Go take your " + dogSelected + " for a walk";
         tempEl.appendChild(goodWeatherEl);
     } else if (fTwoDigits <= 45) {
-        goodWeatherEl.innerHTML = "Make sure to bring a jacket for you and your dog.";
+        goodWeatherEl.innerHTML = "Make sure to bring a jacket for you and your " + dogSelected +".";
         tempEl.appendChild(goodWeatherEl);
     } else {
-        goodWeatherEl.innerHTML = "Maybe Stay home";
+        goodWeatherEl.innerHTML = "Maybe play inside with your " + dogSelected + ".";
         tempEl.appendChild(goodWeatherEl);
     }
 
@@ -197,11 +188,13 @@ dogSectionEl.addEventListener("change", function () {
             dogImageEl.src = dogNames[i].image.url;
             console.log(dogNames[i]);
 
+            // Stores Selected Dog Local
+            dogSelected = dogNames[i].name
+            localStorage.setItem("dogSelected", dogSelected);
 
 
             //create element
             var dogBreedEl = document.createElement("p");
-            var dogOriginEl = document.createElement("p");
             var dogTemperamentEl = document.createElement("p");
 
             //create text
@@ -219,6 +212,7 @@ dogSectionEl.addEventListener("change", function () {
             dogImgContainerEl.appendChild(dogBreedEl);
             // dogImgContainerEl.appendChild(dogOriginEl);
             dogImgContainerEl.appendChild(dogTemperamentEl);
+
 
         }
     }
