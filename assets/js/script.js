@@ -13,7 +13,7 @@ var nameArr = [];
 
 var apiKey = "808721e2dc63debd30d894b4d377543b";
 var cityName = "Orlando";
-var weatherDescription  = "";
+var weatherDescription = "";
 //var dogTemperament = [];
 var weatherIcon;
 var dateToday;
@@ -22,10 +22,11 @@ var wind;
 var humidity;
 var uvIndex;
 var kelvin = 0;
+var i = 0;
 
 //api.openweathermap.org/data/2.5/weather?q=Orlando&appid=808721e2dc63debd30d894b4d377543b
 fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey).then(res => res.json())
-.then(data => console.log(data));
+    .then(data => console.log(data));
 
 //async function to fetch the dog api
 async function start() {
@@ -54,7 +55,7 @@ async function start() {
 }
 
 //event listener on the search city button in index.html
-submitCityEl.addEventListener("click", function(){
+submitCityEl.addEventListener("click", function () {
     event.preventDefault();
     console.log(cityInputValue.value);
     cityName = cityInputValue.value;
@@ -73,7 +74,7 @@ async function startWeather(cityName) {
     const dataWeather = await responseWeather.json()
 
     createWeather(dataWeather);
-    
+
 }
 
 //loadCityName(cityName);
@@ -81,8 +82,8 @@ start();
 var savedCity = localStorage.getItem("cityName")
 startWeather(savedCity);
 
-function createDogNames(breedNames){
-    for(var i = 0; i < breedNames.length; i++){// change to breedNames.lenght afterwards
+function createDogNames(breedNames) {
+    for (var i = 0; i < breedNames.length; i++) {// change to breedNames.lenght afterwards
 
         //create dog list
         var dogNameEl = document.createElement("option");
@@ -92,7 +93,7 @@ function createDogNames(breedNames){
 
         //give ids
         dogNameEl.id = "dog-" + i;
-        
+
         //add class.Names
         //dogNameEl.className = 
 
@@ -105,7 +106,7 @@ function createDogNames(breedNames){
 }
 
 //create weather
-function createWeather(dataWeather){
+function createWeather(dataWeather) {
 
     //empty the containing div
     weatherSectionEl.innerHTML = '';
@@ -114,9 +115,9 @@ function createWeather(dataWeather){
     var tempEl = document.createElement("div");
     var temperatureEl = document.createElement("p");
     var descriptionEl = document.createElement("p");
-    var goodWeatherEl = document.createElement("p");
+    var goodWeatherEl = document.createElement("h3");
     var iconEl = document.createElement("img");
-    var locationEl = document.createElement("p");
+    var locationEl = document.createElement("h2");
 
     console.log(dataWeather);
 
@@ -133,7 +134,7 @@ function createWeather(dataWeather){
 
     //do math to covert to farenheit
     kelvin = dataWeather.main.temp;
-    var fahrenheit = ((kelvin - 273.15) * (9/5) + 32);
+    var fahrenheit = ((kelvin - 273.15) * (9 / 5) + 32);
     var fTwoDigits = fahrenheit.toFixed(1);
 
     //add class name
@@ -154,13 +155,29 @@ function createWeather(dataWeather){
 
 
     //check if weather is good if good take dog for walk else dont
-    if(weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
+    // if(weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
+    //     goodWeatherEl.innerHTML = "Go take your dog for a walk";
+    //     tempEl.appendChild(goodWeatherEl);
+    // }else{
+    //     goodWeatherEl.innerHTML = "Maybe Stay home";
+    //     tempEl.appendChild(goodWeatherEl);
+    // }  
+
+    if (fTwoDigits >= 85) {
+        if (weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds"){
+            goodWeatherEl.innerHTML = "Go take a short walk and bring some water for you and your dog";
+            tempEl.appendChild(goodWeatherEl);
+        }
+    } else if (weatherDescription === "clear sky" || weatherDescription === "few clouds" || weatherDescription === "scattered clouds" || weatherDescription === "broken clouds") {
         goodWeatherEl.innerHTML = "Go take your dog for a walk";
         tempEl.appendChild(goodWeatherEl);
-    }else{
+    } else if (fTwoDigits <= 45) {
+        goodWeatherEl.innerHTML = "Make sure to bring a jacket for you and your dog.";
+        tempEl.appendChild(goodWeatherEl);
+    } else {
         goodWeatherEl.innerHTML = "Maybe Stay home";
         tempEl.appendChild(goodWeatherEl);
-    }    
+    }
 
     //add empty div to div with id of weather
     weatherSectionEl.appendChild(tempEl);
@@ -169,14 +186,14 @@ function createWeather(dataWeather){
 }
 
 //event listern for change on the drop down list
-dogSectionEl.addEventListener("change", function(){
+dogSectionEl.addEventListener("change", function () {
     var selectValue = getValue("dog-selection");
-    for(var i = 0; i < dogNames.length; i++){
-        if(selectValue === dogNames[i].name){
+    for (var i = 0; i < dogNames.length; i++) {
+        if (selectValue === dogNames[i].name) {
 
             //empty contaner before next dog
             dogImgContainerEl.innerHTML = '';
-            
+
             dogImageEl.src = dogNames[i].image.url;
             console.log(dogNames[i]);
 
@@ -189,18 +206,18 @@ dogSectionEl.addEventListener("change", function(){
 
             //create text
             dogBreedEl.innerHTML = "Breed: " + dogNames[i].name;
-            dogOriginEl.innerHTML = "Breed Origin: " + dogNames[i].origin;
+            // dogOriginEl.innerHTML = "Breed Origin: " + dogNames[i].origin;
             dogTemperamentEl.innerHTML = "Average Temperament: " + dogNames[i].temperament;
 
             //checks if origin is unknown or undefined
-            if(dogOriginEl.innerHTML === "" || dogOriginEl.innerHTML === "undefined"){
-                dogOriginEl.innerHTML = "The dog origin is unknown";
-            }
+            // if(dogOriginEl.innerHTML === "" || dogOriginEl.innerHTML === "undefined"){
+            //     dogOriginEl.innerHTML = "The dog origin is unknown";
+            // }
 
             //append elements to container
             dogImgContainerEl.appendChild(dogImageEl);//we forgot to append this but it works now
             dogImgContainerEl.appendChild(dogBreedEl);
-            dogImgContainerEl.appendChild(dogOriginEl);
+            // dogImgContainerEl.appendChild(dogOriginEl);
             dogImgContainerEl.appendChild(dogTemperamentEl);
 
         }
@@ -208,7 +225,7 @@ dogSectionEl.addEventListener("change", function(){
 });
 
 
-function getValue(id){
+function getValue(id) {
     return document.getElementById(id).value;
 }
 
@@ -217,4 +234,3 @@ function getValue(id){
 //     var elems = document.querySelectorAll('select');
 //     var instances = M.FormSelect.init(elems, options);
 // });
-

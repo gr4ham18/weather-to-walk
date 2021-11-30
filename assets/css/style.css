@@ -110,3 +110,13 @@ footer {
         border-top: none;
     }
 }
+
+    option {
+        text-align: center;
+        border: none;
+    }
+
+
+    input {
+        text-align: center;
+    }
